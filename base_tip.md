@@ -144,3 +144,43 @@ if __name__ == '__main__':
     print(p2.name)  #[1] 
  ```
  ***
+ #### 5.列表推导式
+ *带条件的列表推导式*
+ ```python
+ a=[1,2,3,4,5,6,7,89,3]
+ #输出a中所有大于5的数字的平方的列表
+ b=[i * i for i in a if i > 5]
+ ```
+ *字典推导式的用法：键值对互换*
+ ```python
+ a={'sd':123,23:234}
+ b={value:key for key,value in a.items()}
+ # {123:'sd',234:23}
+ ```
+#### 6.python中单下划线和双下划线
+<p style="font-size:10px;">(1)、以单下划线开头，表示这是一个保护成员，只有类对象和子类对象自己能访问到这些变量。以单下划线开头的变量和函数被默认当作是内部函数，使用from module improt *时不会被获取，但是使用import module可以获取  <br>
+(2)、以单下划线结尾仅仅是为了区别该名称与关键词<br>
+(3)、双下划线开头，表示为私有成员，只允许类本身访问，子类也不行。在文本上被替换为_class__method<br>
+(4)、双下划线开头，双下划线结尾。一种约定，Python内部的名字，用来区别其他用户自定义的命名,以防冲突。是一些 Python 的“魔术”对象，表示这是一个特殊成员，<br>例如：定义类的时候，若是添加__init__方法，那么在创建类的实例的时候，实例会自动调用这个方法，一般用来对实例的属性进行初使化，Python不建议将自己命名的方法写为这种形式。<br><br>
+  <a href="https://www.zhihu.com/question/19754941/answer/336260809">上文参考转自知乎，原文链接请点击此行</a>
+</p>
+#### 7.字符串格式化：%和.format
+*字符串格式化：按照一定格式输出的字符串*<br>
+python2.7之后加入了字符串格式化函数：str.format()<br>
+*python中字符串格式化有两种方法一种是 % ，一种是 .format() 方式*<br>
+
+```python
+# % 占位符方式
+a=['wang','sdf','li','zhang']
+for i in a:
+  print('%s is pig'%i,end='; ')
+# wang is pig; sdf is pig; li is pig; zhang is pig;
+
+b={'zhang':1,'wang':2,'li':3}
+for key,value in b.items():
+     print('%s 是第%s 个人'%(key,value))
+#a 是第1 个人
+#b 是第2 个人
+#ddd 是第233 个人
+```
+
