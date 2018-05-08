@@ -47,7 +47,8 @@ HTTP/1.1 200
 ```
 2.头部
 ```
-待扩展
+connect-type
+cookies
 ```
 3.主体
 ```
