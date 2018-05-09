@@ -64,4 +64,15 @@ git 搜索xadmin 下载源码安装包
 improt sys
 sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 ```
-3. 在每个
+3. app中注册model
+```
+xadmin自动发现userprofile用户表,其余表需要注册到adminx.py中，所以需要在每个app下新建adminx.py
+import xadmin
+from .model import *
+class EmailVerifyRecordAdmin(object):  # xadmin继承于object类
+   list_display=['code','email','send_type','send_time']  # 自定义后台显示字段
+   search_fields = ['code','email','send_type']   # 自定义搜索类型
+   list_filter = ['code','email','send_type','send_time']  # 自定义筛选字段
+xadmin.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)   # 注册emailverifyrecord表到xadmin后台
+
+```
