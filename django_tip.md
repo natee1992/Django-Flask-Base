@@ -65,8 +65,8 @@ improt sys
 sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 ```
 3. app中注册model
-```
-xadmin自动发现userprofile用户表,其余表需要注册到adminx.py中，所以需要在每个app下新建adminx.py
+```python
+# xadmin自动发现userprofile用户表,其余表需要注册到adminx.py中，所以需要在每个app下新建adminx.py
 import xadmin
 from .model import *
 class EmailVerifyRecordAdmin(object):  # xadmin继承于object类
@@ -76,4 +76,35 @@ class EmailVerifyRecordAdmin(object):  # xadmin继承于object类
    ######## list_fitter = ['course__name'] 外键的筛选需要两个下划线  ########
 xadmin.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)   # 注册emailverifyrecord表到xadmin后台
 
+```
+4. xadmin全局配置
+在基础app的adminx下配置
+```python 
+from xadmin import views
+
+
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+    # 以上两个为主题功能
+
+class GlobalSettings(object):
+    site_title = 'NATEE-后台管理系统'
+    site_footer = 'NATEE.site'
+    # 以上为页头和页脚配置
+    menu_style = 'accordion'
+    # 以上为左侧导航样式
+    
+    
+xadmin.site.register(views.BaseAdminView,BaseSetting) # 注册主题功能
+xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
+
+'''
+改变右侧英文为中文：
+  在app的apps文件中加入：
+    verbose_name = '自定义名字'
+  每个app文件__init__：
+    default_app_config = 'app.apps.name'
+''' 
+ 
 ```
