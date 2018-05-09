@@ -54,3 +54,16 @@ cookies
 ```
 
 ```
+***
+## django 项目目录
+#### 根目录 settings
+```
+
+```
+1. ./manage.py shell 打开交互环境<br>
+2. *新建数据库用户: * grant all on *.* to 'django'@'%' identified by 'djangopwd';<br>
+flush privileges;<br>
+3. 数据库查询：<br>
+  Student.object
+  查询字段
+
