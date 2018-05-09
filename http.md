@@ -60,10 +60,22 @@ cookies
 ```
 
 ```
+#### 数据库操作：
 1. ./manage.py shell 打开交互环境<br>
 2. *新建数据库用户: * grant all on *.* to 'django'@'%' identified by 'djangopwd';<br>
 flush privileges;<br>
 3. 数据库查询：<br>
   Student.object
   查询字段
-
+4. 批量插入
+```
+for i in range(20):
+    s = Student()
+    s.name = "0"+str(i)
+    s.age = random.randint(15,20)
+    c1 = Pythonclass.objects.all()[0]
+    s.grade = random.randint(20, 30)
+    s.kclass = c1
+    s.save()
+```
+5. 
