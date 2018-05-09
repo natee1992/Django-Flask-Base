@@ -107,4 +107,10 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
     default_app_config = 'app.apps.name'
 ''' 
 ```
-5. templates静态页面
+5. templates静态页面配置
+```python
+ # 在根目录的urls文件中配置templates方法，直接导入首页
+ from django.views.generic import TemplateView
+ #在urlpatterns中添加首页路由：
+ url(r'^$',TemplateView.as_view(template_name='index.html'),name='index')
+```
