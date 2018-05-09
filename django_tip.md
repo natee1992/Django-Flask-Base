@@ -106,5 +106,5 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
   每个app文件__init__：
     default_app_config = 'app.apps.name'
 ''' 
- 
 ```
+5. templates静态页面
