@@ -40,4 +40,28 @@ model可以继承
  少前端样式
  快速开发
 ```
- 
+## settings
+```
+USE_TZ = False 本地时间
+
+```
+## xadmin 导入设置
+1. pip安装
+```
+
+虚拟环境中pip install git+git://github.com/sshwsfc/xadmin.git
+在settings中注册xadmin 以及依赖 crispy_forms
+
+```
+2. 源码安装
+```
+git 搜索xadmin 下载源码安装包
+拷贝源码中xadmin文件
+在项目中新建extra_apps package
+将xadmin放入extra_apps 中
+在pycharm中souce extra_apps文件夹
+在settings中加入搜索位置
+improt sys
+sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
+```
+3. 在每个
