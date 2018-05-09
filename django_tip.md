@@ -73,6 +73,7 @@ class EmailVerifyRecordAdmin(object):  # xadmin继承于object类
    list_display=['code','email','send_type','send_time']  # 自定义后台显示字段
    search_fields = ['code','email','send_type']   # 自定义搜索类型
    list_filter = ['code','email','send_type','send_time']  # 自定义筛选字段
+   ######## list_fitter = ['course__name'] 外键的筛选需要两个下划线  ########
 xadmin.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)   # 注册emailverifyrecord表到xadmin后台
 
 ```
