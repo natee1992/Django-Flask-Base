@@ -149,12 +149,12 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
   class CustomBackend(ModelBackend):
        def authenticate(self, request, username=None, password=None, **kwargs):
            try:
-               user = UserProfile.objects.get(Q(username = username)|Q(email = username))   #加入邮箱验证用户名
+               user = UserProfile.objects.get(Q(username = username)|Q(email = username))
                if user.check_password(password):  #AbstractUser中的验证方法
                   return user
            except Exception as e:
                return None
-  # 在settings中重定义AUTHENTICATE_BACKENDS=('apps.users.views.CustomBackend',)
+  # 1.在settings中重定义AUTHENTICATE_BACKENDS=('apps.users.views.CustomBackend',)
   
 ```
 8. mac pycharm 调试快捷键
@@ -200,4 +200,33 @@ alt +command +F8 评估任意表达式而不调用 评估表达式对话框
 command +F8 在当前行切换断点
 
 shift + command + F8 查看/管理所有断点
+```
+9. 重新基于类重写views方法
+```python
+#继承django的基类View
+from django.views.generic.base import View
+
+class LoginView(View):
+    def get(self,request):
+       return render(request,'login.html',{})
+    def post(self,request):
+       user_name = request.POST.get('username', '')
+       pass_word = request.POST.get('password', '')
+       user = authenticate(username = user_name,password = pass_word)
+       if user:
+          login(request,user)
+          return render(request,'index.html',{})
+       else:
+          return render(request,'login.html',{'msg': '用户名或密码错误'})
+# 在setting的urlpatterns配置中，重定义路由：
+from users.view import LoginView 
+
+urlpatterns = [
+     url(r('^login/'),LoginView.as_view(),name = 'login')
+  ]
+  
+```
+10. form表单预处理，格式验证
+```python
+
 ```
