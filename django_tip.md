@@ -130,7 +130,9 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
                 return render(request,'index.html',{})  # 在返回的request中含有user参数
    # 在静态网页中调用request.user.is_authenticated进行判断user是否存在，验证登陆逻辑
    '''
-   action里面填写的是你的url 因为浏览器会自动在前面加上域名 所以实际上浏览器在请求的时候路径应该是 域名/login/ 这个实际上就是你的urls中配置的对应的view， 记住如果login前面不加/ 比如写成login/ 那么浏览器会自动在你当前请求的路径下加上login比如当前浏览器的路径是 域名/user 那实际上路径会变成 域名/user/login
+   action里面填写的是你的url 因为浏览器会自动在前面加上域名 所以实际上浏览器在请求的时候路径应该是 域名/login/ <br>
+   这个实际上就是你的urls中配置的对应的view， 记住如果login前面不加/ 比如写成login/ <br>
+   那么浏览器会自动在你当前请求的路径下加上login比如当前浏览器的路径是 域名/user 那实际上路径会变成 域名/user/login
    '''
 ```
 7. 自定义auth验证
