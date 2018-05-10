@@ -135,7 +135,52 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
    那么浏览器会自动在你当前请求的路径下加上login比如当前浏览器的路径是 域名/user 那实际上路径会变成 域名/user/login
    '''
 ```
+
 7. 自定义auth验证
 ```python
 
+```
+8. mac pycharm 调试快捷键
+```
+运行和调试快捷键
+
+control +R 运行程序
+
+control +alt +R 快速选择运行/调试配置并运行或编辑它
+
+command +R 重新运行
+
+control +R 重复执行相同的设置，与编辑器具有相同的标签焦点
+
+control +D 调试程序
+
+control +alt +D 快速选择运行/调试配置并进行调试或编辑
+
+F8   转到当前文件的下一行
+
+F7   步骤到下一个执行行
+
+shift +F7 选择要进入的方法，如果当前行包含多个方法调用表达式
+
+shift +F8 从当前方法返回后，转到第一个执行行
+
+alt + shift +F8 运行到此方法或文件中的下一行，跳过当前执行点引用的方法并忽略断点
+
+alt + shift +F7 即使跳过此方法，也可以在当前执行点中调用该方法
+
+alt +F9 运行到插入符所在的行
+
+alt +command +F9 强制运行到插入符所在的行，忽略断点
+
+alt +command +R 恢复程序执行
+
+shift +F2 终止调试会话
+
+alt +F8 评估任意表达式
+
+alt +command +F8 评估任意表达式而不调用 评估表达式对话框
+
+command +F8 在当前行切换断点
+
+shift + command + F8 查看/管理所有断点
 ```
