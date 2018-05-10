@@ -138,7 +138,24 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
 
 7. 自定义auth验证
 ```python
-
+# 首先对django自带的authenticate中的backend进行自定义验证
+  # 自定义CustomBackend方法
+  from django.contrib.auth.backends import ModelBackend
+  from django.db.models import Q
+  
+  from users.models import UserProfile
+  
+  
+  class CustomBackend(ModelBackend):
+       def authenticate(self, request, username=None, password=None, **kwargs):
+           try:
+               user = UserProfile.objects.get(Q(username = username)|Q(email = username))   #加入邮箱验证用户名
+               if user.check_password(password):  #AbstractUser中的验证方法
+                  return user
+           except Exception as e:
+               return None
+  # 在settings中重定义AUTHENTICATE_BACKENDS=('apps.users.views.CustomBackend',)
+  
 ```
 8. mac pycharm 调试快捷键
 ```
