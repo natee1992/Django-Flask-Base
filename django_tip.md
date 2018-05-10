@@ -108,9 +108,25 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
 ''' 
 ```
 5. templates静态页面配置
+不用配置views方面，直接匹配静态页面。
 ```python
  # 在根目录的urls文件中配置templates方法，直接导入首页
  from django.views.generic import TemplateView
  #在urlpatterns中添加首页路由：
  url(r'^$',TemplateView.as_view(template_name='index.html'),name='index')
+```
+6. 用户登录配置
+```python
+# 将登陆html中的form中的action指向urls配置的地址
+# 配置users中的views方法 
+   #通过django自带认证方法认证
+  from django.contrib.auth import authenticate,login
+    	if request.method == 'POST':
+          user_name = request.POST.get('username','')
+          pass_word = request.POST.get('password','')
+          user = authenticate(user_name, pass_word)
+          if user is not None:
+                login(request,user)  # 调用
+                return render(request,'index.html',{})
+   在静态网页中调用request.user.
 ```
