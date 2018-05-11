@@ -228,5 +228,36 @@ urlpatterns = [
 ```
 10. form表单预处理，格式验证
 ```python
+# 在app中新建forms.py
 
+ from django import forms
+ 
+ class LoginForm(forms.Form):
+     username = forms.CharField(required=True)
+     password = forms.CharField(required=True,min_length=5)   required=True监听输入变量是否为空
+     
+#在views中导入form
+from usrs.form import LoginForm
+
+class LoginView(View):
+    def get(request):
+        return render(request,'login.html')
+    def post(request):
+        login_form = LoginForm(request.POST)
+        if login_form.is_vaild():
+          #判断逻辑
+          user_name = request.POST('username','')
+          pass_word = request.POST('password','')
+          user = authenticate(username= user_name,password = pass_word)
+          if user:
+             login(request,user)
+             return render(request,'index.html',{})
+          else:
+             return render(request,'login.html,{'msg':'登录失败','login_form':login_form})  
+             #login_form交给静态页面进行配置
+             #在执行过for key,value in login_form.errors.items():后输出的key,value如下:
+             #错误字段：username 错误类型<ul class="errorlist"><li>这个字段是必填项。</li></ul> 
+             #错误字段：password 错误类型<ul class="errorlist"><li>确保该变量至少包含 5 字符(目前字符数 1)。</li></ul> 
+             #说明value是包含前端标签的字段，同时带有errorlist--class属性，可以在css文件中自定义错误样式
+          
 ```
