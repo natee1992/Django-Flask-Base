@@ -7,6 +7,7 @@ auth_user表继承于django.contrib.auth.models中的AbstractUser
 在执行makemigrations前，由于admin中很多依赖于auth_user，可能迁移出错，所以将数据库中除auth_user表全部删除后再执行数据库迁移
 CharField类型必须指定max_length
 ```
+***
 ## 设计app
 设计表时避免表的循环引用
 ```
@@ -18,6 +19,7 @@ CharField类型必须指定max_length
 ```
 解决思路：app分层，建立上层app引用下层<br>
 同时将只于user衔接的表定义在user中
+***
 ## 设计表tips
 ```
 引入包分3部分：
@@ -33,6 +35,7 @@ django没有一对多，多对一的映射，只有外键的映射
 model可以继承
 
 ```
+***
 ## 后台管理
 ```
 特点：
@@ -40,11 +43,13 @@ model可以继承
  少前端样式
  快速开发
 ```
+***
 ## settings
 ```
 USE_TZ = False 本地时间
 
 ```
+***
 ## xadmin 导入设置
 1. pip安装
 ```
@@ -107,6 +112,7 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
     default_app_config = 'app.apps.name'
 ''' 
 ```
+***
 5. templates静态页面配置
 不用配置views方面，直接匹配静态页面。
 ```python
@@ -115,6 +121,7 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
  #在urlpatterns中添加首页路由：
  url(r'^$',TemplateView.as_view(template_name='index.html'),name='index')
 ```
+***
 6. 用户登录配置
 ```python
 # 将登陆html中的form中的action指向urls配置的地址
@@ -135,7 +142,7 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
    那么浏览器会自动在你当前请求的路径下加上login比如当前浏览器的路径是 域名/user 那实际上路径会变成 域名/user/login
    '''
 ```
-
+***
 7. 自定义auth验证
 ```python
 # 首先对django自带的authenticate中的backend进行自定义验证
@@ -157,6 +164,7 @@ xadmin.site.register(views.CommAdminView,GlobalSettings) # 注册全局功能
   # 1.在settings中重定义AUTHENTICATE_BACKENDS=('apps.users.views.CustomBackend',)
   
 ```
+***
 8. mac pycharm 调试快捷键
 ```
 运行和调试快捷键
@@ -201,6 +209,7 @@ command +F8 在当前行切换断点
 
 shift + command + F8 查看/管理所有断点
 ```
+***
 9. 重新基于类重写views方法
 ```python
 #继承django的基类View
@@ -226,6 +235,7 @@ urlpatterns = [
   ]
   
 ```
+***
 10. form表单预处理，格式验证
 ```python
 # 在app中新建forms.py
@@ -261,6 +271,7 @@ class LoginView(View):
              #说明value是包含前端标签的字段，同时带有errorlist--class属性，可以在css文件中自定义错误样式
           
 ```
+***
 **遗留问题，自定义form.errors中的错误字段**<br>
 11. session和cookie登录机制
 ```python
@@ -279,6 +290,7 @@ settins中注册的app中有 'django.contrib.sessions',此app在接收到页面�
 '''
 # session是cookie的一种实现方式，为了用户信息安全
 ```
+***
 12. 用户注册
 ```python
 '''
@@ -308,4 +320,10 @@ settins中注册的app中有 'django.contrib.sessions',此app在接收到页面�
    <img src="/captcha/image/9edec57be36a17ae5d4a15b5c9c7ccca9bf8fe49/" alt="captcha" class="captcha" /><input id="id_captcha_0" name="captcha_0" type="hidden" value="9edec57be36a17ae5d4a15b5c9c7ccca9bf8fe49" />
 <input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
 '''
+# 密码加密
+from django.contrib.auth.hashers import make_password
+
+user_profile.password = make_password(password)
+```
+```
 ```
