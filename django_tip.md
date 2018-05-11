@@ -304,7 +304,8 @@ settins中注册的app中有 'django.contrib.sessions',此app在接收到页面�
           return render(request,'register.html',{'register_form':register_form})
 7.  在静态页面中引入register_form
    {{ register_form.captcha }}
-   自动生成html标签
-
+   自动生成html标签如下：
+   <img src="/captcha/image/9edec57be36a17ae5d4a15b5c9c7ccca9bf8fe49/" alt="captcha" class="captcha" /><input id="id_captcha_0" name="captcha_0" type="hidden" value="9edec57be36a17ae5d4a15b5c9c7ccca9bf8fe49" />
+<input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
 '''
 ```
