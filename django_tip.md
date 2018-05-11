@@ -271,6 +271,11 @@ class LoginView(View):
  此时服务器可以识别浏览器id。不同的服务器的cookie存在不同的域，服务器之间不能跨域访问。
    cookies的储存形式为字典{}形式。
    
----------------------------
+------session-----机制----------
+django将用户名密码等用户信息加密后储存在session_data中，在settings中可以设置expire_date的时间，从而确定session_data的过期时间
+settins中注册的app中有 'django.contrib.sessions',此app在接收到页面的request请求后在reuqest中读取到sessionid然后在django_session中找到
+对应的session_data然后进行反解，再读取出其中的字段信息，将信息放入request中。在页面向服务器返回resoponse数据时，也会自动为返回的数据加上sessionid。
+
 '''
+# session是cookie的一种实现方式，为了用户信息安全
 ```
