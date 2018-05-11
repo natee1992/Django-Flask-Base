@@ -261,7 +261,7 @@ class LoginView(View):
              #说明value是包含前端标签的字段，同时带有errorlist--class属性，可以在css文件中自定义错误样式
           
 ```
-**遗留问题，自定义form.errors中的错误字段**
+**遗留问题，自定义form.errors中的错误字段**<br>
 11. session和cookie登录机制
 ```python
 #http无状态协议，导致无法识别用户，统一返回一个界面
@@ -278,4 +278,14 @@ settins中注册的app中有 'django.contrib.sessions',此app在接收到页面�
 
 '''
 # session是cookie的一种实现方式，为了用户信息安全
+```
+12. 用户注册
+```python
+'''
+验证码模块的导入
+1.  pip3 install django-simple-captcha
+2.  注册captcha
+3.  url(r'^captcha/$', include('captcha.urls')),
+4.  ./mangage.py migrate
+'''
 ```
