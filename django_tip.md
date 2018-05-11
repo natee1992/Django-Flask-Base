@@ -285,7 +285,26 @@ settins中注册的app中有 'django.contrib.sessions',此app在接收到页面�
 验证码模块的导入
 1.  pip3 install django-simple-captcha
 2.  注册captcha
-3.  url(r'^captcha/$', include('captcha.urls')),
+3.  url(r'^captcha/', include('captcha.urls')),
 4.  ./mangage.py migrate
+5.  定义注册RegisterForm
+    from captcha.fields import CaptchaField
+    
+    class RegisterForm(forms.Form):
+        email = forms.EmailField(require=Ture)
+        password = forms.CharField(require=True, min_length=5)
+        captcha = CaptchaFidld()
+        
+6.  在views中导入form
+   from users.forms import RegisterForm
+   
+   class RegisterView(View):
+      def get(request):
+          register_form = RegisterForm()
+          return render(request,'register.html',{'register_form':register_form})
+7.  在静态页面中引入register_form
+   {{ register_form.captcha }}
+   自动生成html标签
+
 '''
 ```
