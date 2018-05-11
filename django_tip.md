@@ -262,4 +262,8 @@ class LoginView(View):
           
 ```
 **遗留问题，自定义form.errors中的错误字段**
-11. session
+11. session和cookie登录机制
+```python
+#http无状态协议，导致无法识别用户，统一返回一个界面
+#浏览器A向服务器发送请求，服务器自动给浏览器设置id为1，随后将id返回给浏览器。浏览器吧id放入cookie中，下次浏览器
+```
