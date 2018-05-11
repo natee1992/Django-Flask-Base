@@ -4,6 +4,14 @@
 ```
 apt-get update
 
+adduser lee #创建用户lee
+
+usermod -aG sudo lee #给予lee用户sudo权限
+
+passwd lee #设定密码
+
+su lee #切换用户为lee,其对应的文件夹为/home/lee
+
 apt-get install nginx
 
 apt-get install 
