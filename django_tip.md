@@ -261,3 +261,5 @@ class LoginView(View):
              #说明value是包含前端标签的字段，同时带有errorlist--class属性，可以在css文件中自定义错误样式
           
 ```
+**遗留问题，自定义form.errors中的错误字段**
+11. session
