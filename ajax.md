@@ -24,6 +24,11 @@ xhr.ontimeout = function(){
       xhr.abort()
       console.log('服务器在2秒内没有反应,请求被取消')
 }
+xhr.onprogress = function(event){
+    console.log(event.loaded) #已经发送的数据量
+    console.log(event.total) #总共要发送的量
+    console.logn(event.loaded/event.total*100 + '%')  #百分比
+}
 xhr.onreadystatechange=function(){
     var readystate= xhr.readyState
     switch(readystate){
@@ -45,4 +50,8 @@ xhr.onreadystatechange=function(){
 ajax.open('get','/tajx')
 var data = 'hello'
 ajax.send(data)
+
+
+
+onprogrees #绑定回调函数
 ```
