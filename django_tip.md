@@ -325,5 +325,10 @@ from django.contrib.auth.hashers import make_password
 
 user_profile.password = make_password(password)
 ```
+**邮箱验证激活模块**
+```python
+# apps目录下新建utils，utils下新建email_send
+  setting中配
+
 ```
-```
+***
