@@ -368,5 +368,22 @@ EMAIL_FROM = 'nateeriver1992@163.com'
            if send_status:
               print('邮箱已发送')
               pass
+              
+     #定义邮箱激活方法
+     # 1.从路由器中获取验证码
+        url(r'active/(?P<active_code>.*/$',ActiveView.as_view(),name='user_active')
+     # 2. 定义验证方法
+        class ActiveView(View):
+           def get(request,active_code):
+                codes = EmailVerifyCord.objects.filter(code=active_code)
+                if codes:
+                    for code in codes:
+                        email = code.email
+                        user = UserProfile.objects.get(username=email)
+                        user.is_active = True
+                        user.save()
+                        return render(request,'login.html',{})
+                retrun render(request,'index.html',{})
+               
 ```
 ***
