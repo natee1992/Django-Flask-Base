@@ -328,7 +328,45 @@ user_profile.password = make_password(password)
 **邮箱验证激活模块**
 ```python
 # apps目录下新建utils，utils下新建email_send
-  setting中配
+#  setting中配置邮箱发送
+ 
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'nateeriver1992@163.com'
+EMAIL_HOST_PASSWORD = '********'
+EMAIL_USE_TLS = False
+EMAIL_FROM = 'nateeriver1992@163.com'
+# 新建untils包，在包中新建mail_send.py
+    import random
+   
+    from django.core.mail import send_mail
 
+    from users.models import EmailVerifyRecord
+    from mxOnline.settings import EMAIL_FROM
+    
+    #定义随机验证码
+    def random_str(random_length=8):  #默认8位
+       str = ''
+       chars = 'AaBbCcDdFfGgHhIiGgKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+       len = len(chars) - 1
+       for i in range(random_length=8):
+           str += chars[radom.randint(0,len)]
+       return str
+    
+    #定义邮箱发送方法
+    
+    def send_register_email(email, send_type='register'):
+        email_record = EmailVerifyRecord()
+        email_record.code = random_str(16)
+        email_record.send_type = send_type
+        email_record.email = email
+        email_record.save()
+        if send_type == 'register':
+           mail_title = '邮箱标题'
+           maii_body = '请点击链接激活 ：http://127.0.0.1:8000/activate/{0}'.format(email_record.code)
+           send_status = send_mail(mail_title,mail_body,EMAIL_FROM,[email])
+           if send_status:
+              print('邮箱已发送')
+              pass
 ```
 ***
