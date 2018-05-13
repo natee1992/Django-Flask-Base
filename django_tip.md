@@ -392,5 +392,10 @@ EMAIL_FROM = 'nateeriver1992@163.com'
 13. 找回密码
 ```python
 # 邮箱找回需要2个步骤
- # 1. 填写
+ # 1. 填写用户邮箱，并输入验证码
+ # 2. 通过邮件链接转到用户重置密码界面登录
+ #-----------定义找回密码界面------------#
+ def ForgetPwdView(View):
+     def get(self,request):
+         form
 ```
