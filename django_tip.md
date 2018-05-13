@@ -271,8 +271,9 @@ class LoginView(View):
              #说明value是包含前端标签的字段，同时带有errorlist--class属性，可以在css文件中自定义错误样式
           
 ```
+*遗留问题，自定义form.errors中的错误字段*
 ***
-**遗留问题，自定义form.errors中的错误字段**<br>
+
 11. session和cookie登录机制
 ```python
 #http无状态协议，导致无法识别用户，统一返回一个界面
@@ -386,4 +387,10 @@ EMAIL_FROM = 'nateeriver1992@163.com'
                 retrun render(request,'index.html',{})
                
 ```
+*处理遗留问题：登录判断用户是否激活/链接地址失效*
 ***
+13. 找回密码
+```python
+# 邮箱找回需要2个步骤
+ # 1. 填写
+```
