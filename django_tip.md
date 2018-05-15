@@ -1,4 +1,31 @@
 *开发环境pycharm mysql*
+## django 缓存表
+*数据库*
+```python
+# settings中配置
+CACHES = {
+    'default':{
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table', #缓存数据库名称
+
+    }
+}
+# 操作方法views中
+from django.views.decorators.cache import cache_page
+
+@cache_page(60*7)
+```
+*django-redis*
+```python
+pip install django-redis
+#settings 中作为cache backend使用配置
+
+
+
+brew install redis-server
+
+```
+<hr>
 ## 扩展auth_user表 
 ```
 auth_user表继承于django.contrib.auth.models中的AbstractUser
