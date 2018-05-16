@@ -424,5 +424,20 @@ EMAIL_FROM = 'nateeriver1992@163.com'
  #-----------定义找回密码界面------------#
  def ForgetPwdView(View):
      def get(self,request):
-         form
+         return render(request, 'forgetpwd.html')
+      
+     def post(self,request):
+         forget_form = ForgetForm()
+         if forget_form.is_avild():
+             email = request.POST.get('email','')
+             email = UseProfile.objects.filter(email = email)
+             if email:
+                    send_register_mail(mail,'forget')
+                    return render('success_send.html','')
+             else:
+                    return render('forgetpwd.html', {'msg': '邮箱错误'})
+         else:
+             return render('forgetpwd.html', {'msg': '输入格式错误'})
+             
 ```
+
