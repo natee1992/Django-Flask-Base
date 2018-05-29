@@ -269,17 +269,64 @@ teardown_app_request             |       每次请求之后  即使出现异常
 ##模版引擎
 ***
 按照一定的规则 负责展示并渲染一个html页面给用户 模版给拱了替换的规则<br>
-**使用的模版引擎
-*jinja2 由flask开发
+**使用的模版引擎**
+*jinja2 由flask开发*
 ###一、模版的使用
-*（1）创建模板目录
+*（1）创建模板目录*
 ```python
 project/
        templates/
                 模板文件
 ```
+*（2）创建模板目录*
+1.变量<br>
+{{ 变量名称 }}
+2.标签
+{% 标签名称 %}
+***
+###过滤器
+```python
+var|abs  绝对值
+var|default()  默认值   只有未定义才采取默认值   可加参数 boolean=True
+var|first 取出var值中第一个值
+            绝对值{{ data.num|abs }}
+
+            默认值{{ data.bool|default('default') }}
+
+            默认值{{ data.none|default('default',boolean=True) }}
+
+            第一个值{{ title|first }}
+
+            格式化值{{ '我叫%s,我今年%s岁,我的存款为%s'|format('雷神',18,200) }}
+
+            长度{{ title|length }}
+
+            合并字符串{{ ['a','b']|join('x') }}
+
+            safe{{ data.h3|safe }}
+
+            int{{ data.num|int }}
+
+            float{{ data.num|float }}
 
 
+```
+###三、标签
+*语法{% tag %}
+```python
+ <h2>分支</h2>
+    {% if data.bool %}
+        {{data.bool}}为真
+    {% else%}
+        {{ data.bool }}为假
+    {% endif %}
+  {% for k,v in data.items()%}
+    {{ k}}{{v}}
+  {% endfor%}
+```
+###文件的包含
+主题结构
+    {% include('模版名称') %}
 ## day3
 提交表单 使用wtf第三方
 ## day4
