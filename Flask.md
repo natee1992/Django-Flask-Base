@@ -162,16 +162,124 @@ def get_cookie():
 #移除cookie
     response.delete_cookie('name')
 ```
+session
+    cookie每次携带着唯一的sessionid来进行请求访问，服务端根据sessionid来区分不同用户的请求，所以sesion是基于cookie的，服务端会给米一个请求创建一个session对象
+（1）设置session
+```python
+@app.rout('/set_session')
+def set_session():
+    session['username'] = 'lisi'
+    return '设置session'
+```
+（2）获取session
+```python
+@app.route('/get_session')
+def get_session():
+    return session.get('username')
+```
+(3) 删除session
+```python
+@app.route('/del_session')
+def del_session():
+    return session.pop('username')
+```
+（4）设置过期时间
+```python
+@app.route('/set_session')
+def set_session():
+    session['username'] = 'lisi'
+    session_life_time = timedelta(minutes=10)
+    # 设置session的持久化
+    session.permanent = True
+    app.permanent_session_lifetime = session_life_time
+    return '设置session'
+```
+### flask-script 扩展库
+*概念：一个flask终端的运行解析器，因为在项目完成之后，不应该有任何的改动，所以需要接种终端来完成不同启动项的配置*
+```
+-h 主机名
+-p 指定端口号
+-threader 开启多线程
+-d 开启调试模式
+-r 代码修改后重新加载
+```
+### blueprint蓝图
+*当代码越来月复杂时，视图文件不应该放在一个文件中，使用蓝本将不同模块功能的视图函数做成一个视图函数，放在一个文件中*
+```python
+from flask import Flask, session, request, Blueprint
+app.register_blueprint(mysession，url_prefix = '/user')
+from mysession import mysession
+--------------------------------------------------------
+#在mysession中
+from flask import Blueprint, session
+# 设置session
+mysession = Blueprint('mysession', __name__)
 
 
-    
+@mysession.route('/set_session')
+def set_session():
+    session['username'] = 'lisi'
+    session_life_time = timedelta(minutes=10)
+    # 设置session的持久化
+    session.permanent = True
+    app.permanent_session_lifetime = session_life_time
+    return '设置session'
+
+# 获取session
+
+
+@mysession.route('/get_session')
+def get_session():
+    return session.get('username')
+
+# 删除session
+
+
+@mysession.route('/del_session')
+def del_session():
+    return session.pop('username')
+
+```
+
 *两个架构：<br>
 * B/S
 * C/S
 
 ## day2 
-模板
-jinja2
+####钩子函数
+*类似与django中间件 在使用的时候需要使用装饰器*
+在主程序中使用
+```python
+#钩子函数                     |      #功能描述
+before_first_request         |      第一次请求之前
+before_request               |       每次请求之前
+after_request                |       每次请求之后 前提是没有出现异常
+teardown_request             |       每次请求之后  即使出现异常
+
+```
+#####钩子函数使用在蓝本中
+```python
+#钩子函数                         |      #功能描述
+before_app_first_request         |      第一次请求之前
+before_app_request               |       每次请求之前
+after_app_request                |       每次请求之后 前提是没有出现异常
+teardown_app_request             |       每次请求之后  即使出现异常
+
+```
+##模版引擎
+***
+按照一定的规则 负责展示并渲染一个html页面给用户 模版给拱了替换的规则<br>
+**使用的模版引擎
+*jinja2 由flask开发
+###一、模版的使用
+*（1）创建模板目录
+```python
+project/
+       templates/
+                模板文件
+```
+
+
 ## day3
 提交表单 使用wtf第三方
 ## day4
