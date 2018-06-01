@@ -331,11 +331,70 @@ var|first 取出var值中第一个值
 提交表单 使用wtf第三方
 ## day4
 文件上传与邮件发送
-## day5
-##sqlalchemy 模型
+## sqlalchemy 模型
 *安装pip install flask-sqlalchemy*
 **orm使用的好处**
 1.增加sql的重复使用率  <br>
 2.使表容易阅读   <br>
 3.可移植性      <br>
-### 
+### 一、原生数据库
+#### （1）新建一个数据库
+```python
+create database if not exists 库名 character set utf8;
+alter database 库名 character set utf8;
+alter table 表名 character set utf8;
+alter table 表名 modify 字段名 字段类型 可选约束条件 character set utf8
+```
+#### (2) 安装数据库模块
+```python
+pip install pymysql
+```
+#### （3）安装flask-sqlalchemy
+```python
+pip install flask-sqlalchemy
+```
+#### (4) 配置路径
+```
+DB_URI= 'mysql+pymql://root:password@host:port/demo'
+```
+```python
+from sqlalchemy import create_engine
+
+HOST = '127.0.0.1'
+USERNAME = 'root'
+PASSWORD = '12345'
+DATABASE = 'demo'
+PORT = '3306'
+DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(
+    USERNAME, PASSWORD, HOST, PORT, DATABASE)
+engine = create_engine(DB_URI)
+
+with engine.connect() as db:
+    data = db.execute('select * from user')
+    db.execute('delete from user where id=1')
+
+```
+## 二、在flask中使用ORM模型
+**配置**
+```python
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask('__name__')
+# 实例化ORM
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysql://root:12345@127.0.0.1:3306/demo'
+
+
+@app.route('/')
+def index():
+    return '首页'
+
+
+if __name__ == '__main__':
+    app(debug=True)
+
+```
+## 三、设计表模型
+**字段类型**
+|类型名|python中的类型|
