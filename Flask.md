@@ -332,4 +332,10 @@ var|first 取出var值中第一个值
 ## day4
 文件上传与邮件发送
 ## day5
-model模型
+##sqlalchemy 模型
+*安装pip install flask-sqlalchemy*
+**orm使用的好处**
+1.增加sql的重复使用率  <br>
+2.使表容易阅读   <br>
+3.可移植性      <br>
+### 
